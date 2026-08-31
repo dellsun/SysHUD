@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{8F2C1A4B-3D5E-4F7A-9B12-6C9E8D0A1F2C}</ProjectGuid>
+    <RootNamespace>SysHUD</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <Configuration>Release</Configuration>
+    <Platform Condition="'$(Platform)'==''">x64</Platform>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization Condition="'$(Configuration)'=='Release'">true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/std:c++17 /utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;comctl32.lib;pdh.lib;dxgi.lib;d3d11.lib;psapi.lib;advapi32.lib;ole32.lib;winhttp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateManifest>true</GenerateManifest>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GpuMonitor.cpp">
+      <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Monitor.cpp" />
+    <ClCompile Include="src\OverlayWindow.cpp" />
+    <ClCompile Include="src\TrayIcon.cpp" />
+    <ClCompile Include="src\SettingsDlg.cpp" />
+    <ClCompile Include="src\Sampler.cpp" />
+    <ClCompile Include="src\CpuMemNet.cpp" />
+    <ClCompile Include="src\ProcTop.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\i18n.cpp" />
+    <ClCompile Include="src\QuoteFetcher.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\SysHUD.h" />
+    <ClInclude Include="src\OverlayWindow.h" />
+    <ClInclude Include="src\TrayIcon.h" />
+    <ClInclude Include="src\SettingsDlg.h" />
+    <ClInclude Include="src\Sampler.h" />
+    <ClInclude Include="src\CpuMemNet.h" />
+    <ClInclude Include="src\GpuMonitor.h" />
+    <ClInclude Include="src\ProcTop.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\QuoteFetcher.h" />
+    <ClInclude Include="res\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\resource.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

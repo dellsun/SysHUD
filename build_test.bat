@@ -1,0 +1,3 @@
+@echo off
+set INC=/I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt" /I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared" /I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um" /I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\winrt" /I"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.38.33130\include" /I"C:\Users\q123\Desktop\SysHUD\src"
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.38.33130\bin\Hostx64\x64\cl.exe" /c /DNOMINMAX /I"C:\Users\q123\Desktop\SysHUD\res" %INC% src\ProcTop.cpp /Fo:ProcTop.obj 2>&1 | findstr /i "error"

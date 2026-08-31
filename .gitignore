@@ -1,0 +1,28 @@
+# ===== Visual Studio / IDE =====
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# ===== 构建产物 / Build output =====
+# 整个 x64 输出目录（含 .obj/.pdb/.tlog/.res/.log 等）
+x64/
+
+# 其他常见平台/配置目录（如启用可取消注释）
+# Debug/
+# Release/
+
+# 根目录外漏的中间文件
+*.obj
+*.pch
+*.pdb
+*.idb
+*.ilk
+*.res
+*.tlog
+*.log
+
+# ===== 运行期配置与日志 / Runtime config & logs =====
+SysHUD.ini
+build_out.log
