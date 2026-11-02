@@ -30,7 +30,12 @@ void SplitW(const std::wstring& s, wchar_t sep, std::vector<std::wstring>& out) 
 
 } // namespace
 
-// 把用户填写的代码规范化：纯数字代码自动补市场前缀（6->sh, 0/3->sz），已带前缀的保持不变。
+// 把用户填写的代码规范化：纯数字代码自动补市场前缀，已带前缀的保持不变。
+// 前缀规则（首位数字，均经 qt.gtimg.cn 实测验证）：
+//   6 -> sh（沪市 A 股 60/68）；5 -> sh（沪市基金/ETF 50/51/52/56/58）
+//   0/3 -> sz（深市 A 股 000/001/002/300）；1 -> sz（深市基金/ETF 15/16/18）
+//   4/8 -> bj（北交所 43/83/87）
+// 其余首位不映射，原样提交（由接口返回 none_match 暴露，不做兜底猜测）。
 static std::wstring NormalizeCodes(const std::wstring& codes) {
     std::wstring res;
     size_t start = 0;
@@ -43,11 +48,12 @@ static std::wstring NormalizeCodes(const std::wstring& codes) {
         if (a == std::wstring::npos) { start = (comma == std::wstring::npos) ? codes.size() : comma + 1; continue; }
         tok = tok.substr(a, b - a + 1);
 
-        if (!tok.empty() && tok[0] != L's' && tok[0] != L'S') {
+        if (!tok.empty() && tok[0] != L's' && tok[0] != L'S' && tok[0] != L'b' && tok[0] != L'B') {
             // 纯数字：按首位补前缀
             wchar_t c = tok[0];
-            if (c == L'6') tok = L"sh" + tok;
-            else if (c == L'0' || c == L'3') tok = L"sz" + tok;
+            if (c == L'6' || c == L'5') tok = L"sh" + tok;
+            else if (c == L'0' || c == L'3' || c == L'1') tok = L"sz" + tok;
+            else if (c == L'4' || c == L'8') tok = L"bj" + tok;
         }
         if (!res.empty()) res += L",";
         res += tok;
